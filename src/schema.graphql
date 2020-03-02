@@ -1,0 +1,50 @@
+type Query {
+  user(id: ID!): User!
+  course(id: ID!): Course
+  post(id: ID!): Post
+  users: [User!]!
+  courses: [Course!]!
+  posts: [Post!]
+}
+
+type Mutation {
+  createUser(firstname: String, lastname: String, email: String): User
+  updateUser(id: ID!, firstname: String, lastname: String, email: String): User
+  deleteUser(id: ID!): User
+  createPost(published: Boolean!, title: String, content: String): Post
+  updatePost(id: ID!, published: Boolean!, title: String, content: String): Post
+  deletePost(id: ID!): Post
+  createCourse(published: Boolean, name: String!, description: String!): Course
+  updateCourse(id: ID!, published: Boolean, name: String, description: String): Course
+  deleteCourse(id: ID!): Course
+  signup(email: String!, password: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type Post {
+  id: ID!
+  published: Boolean!
+  title: String!
+  content: String!
+}
+
+type Course {
+  id: ID!
+  published: Boolean
+  name: String!
+  description: String!
+  instructor: User
+}
+
+type User {
+  id: ID!
+  firstname: String
+  lastname: String
+  email: String!
+  Courses: [Course!]
+}
+
+type AuthPayload {
+  token: String!
+  user: User
+}
